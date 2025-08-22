@@ -1,6 +1,6 @@
+import "reflect-metadata";
 import express, { Application, Router } from 'express';
 import dotenv from 'dotenv';
-
 class App {
     public app: Application;
     private readonly port: number;
