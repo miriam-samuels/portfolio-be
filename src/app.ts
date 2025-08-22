@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import express, { Application, Router } from 'express';
 import dotenv from 'dotenv';
 class App {
@@ -23,6 +22,10 @@ class App {
         routes.forEach((route) => {
             this.app.use('/api', route);
         });
+    }
+
+    private registerServices(){
+        
     }
 
     public listen() {

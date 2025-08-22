@@ -1,10 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 import { Blog } from '../generated/prisma';
-import { injectable } from 'tsyringe';
+import {  injectable } from 'tsyringe';
 
 @injectable()
- class BlogRepository {
-    constructor(private readonly prisma: PrismaClient) { }
+class BlogRepository {
+    constructor(
+        private readonly prisma: PrismaClient
+    ) { }
 
     async findAll(): Promise<Blog[]> {
         return this.prisma.blog.findMany({
