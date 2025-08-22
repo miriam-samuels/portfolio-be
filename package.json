@@ -2,7 +2,7 @@
   "scripts": {
     "prepare": "prisma generate",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc -p .˚",
+    "build": "tsc",
     "start": "npm run generate && node dist/server.js",
     "generate": "prisma generate"
   },
