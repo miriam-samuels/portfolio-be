@@ -1,9 +1,7 @@
-import { injectable } from "tsyringe";
 import { IBlog } from "../interfaces/blog.interface";
 import BlogRepository from "../repository/blog.repository";
 
 
-@injectable()
 class BlogService {
     constructor(private blogRepo: BlogRepository) {
 
@@ -21,8 +19,8 @@ class BlogService {
         return blog;
     }
 
-    async createBlog(blog: Partial<IBlog>): Promise<IBlog> {
-        return this.createBlog(blog)
+    async createBlog(blog: Omit<IBlog,"id">): Promise<IBlog> {
+        return this.blogRepo.create(blog)
     }
 
     async updateBlog(id: string, blog: Partial<IBlog>): Promise<IBlog> {

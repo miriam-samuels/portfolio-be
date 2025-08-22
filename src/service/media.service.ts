@@ -1,7 +1,5 @@
-import { injectable } from 'tsyringe';
 import StorageService from './storage.service';
 
-@injectable()
 class MediaService {
     constructor(private storageService: StorageService) { }
     async getFile(filename: string) {

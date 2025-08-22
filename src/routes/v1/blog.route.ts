@@ -1,9 +1,7 @@
 import { Router } from 'express';
 import BlogController from '../../controller/blog.controller';
-import { injectable } from 'tsyringe';
 
 
-@injectable()
 class BlogRoutes {
     public router: Router;
     

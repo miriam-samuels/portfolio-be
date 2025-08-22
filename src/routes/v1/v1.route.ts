@@ -1,9 +1,6 @@
-// routes/index.ts
 import { Router } from 'express';
 import BlogRoutes from './blog.route';
-import { injectable } from 'tsyringe';
 
-@injectable()
 class V1Routes {
   public router: Router;
 

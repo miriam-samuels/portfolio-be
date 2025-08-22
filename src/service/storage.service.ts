@@ -1,8 +1,6 @@
 import { Storage, Bucket, File } from '@google-cloud/storage';
 import path from 'node:path';
-import { injectable } from 'tsyringe';
 
-@injectable()
 class StorageService {
     private bucketName = process.env.BLOG_BUCKET ?? '';
     private projectId = process.env.GCP_PROJECT_ID ?? '';

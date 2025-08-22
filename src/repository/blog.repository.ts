@@ -1,8 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { Blog } from '../generated/prisma';
-import {  injectable } from 'tsyringe';
 
-@injectable()
 class BlogRepository {
     constructor(
         private readonly prisma: PrismaClient

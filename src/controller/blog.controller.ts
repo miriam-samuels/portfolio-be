@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import { ResponseHelper } from "../helper/response.helper";
 import BlogService from "../service/blog.service";
-import { injectable } from "tsyringe";
 
-@injectable()
 class BlogController {
   constructor(private readonly service: BlogService) {}
 

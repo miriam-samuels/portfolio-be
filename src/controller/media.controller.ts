@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import MediaService from '../service/media.service';
 import { ResponseHelper } from '../helper/response.helper';
-import { injectable } from 'tsyringe';
 
-@injectable()
 class MediaController {
     constructor(private mediaService: MediaService) {}
 
