@@ -6,14 +6,23 @@ import BlogRoutes from "./routes/v1/blog.route";
 import V1Routes from "./routes/v1/v1.route";
 import BlogService from "./service/blog.service";
 import { PrismaClient } from '@prisma/client';
+import dbConfig from './config/db.config';
 
 
 const PORT = Number(process.env.PORT) || 3000;
 
-const appRoutes = createAppRoutes();
+async function bootstrap() {
+  // 1. Connect DB
+  await dbConfig.connect();
 
-const app = new App(PORT, [appRoutes.router]);  // array in case of multiple
-app.listen();
+  // 2. Build routes (repositories, services, controllers, etc.)
+  const appRoutes = createAppRoutes();;
+
+  // 3. Start server
+  const app = new App(PORT, [appRoutes.router]);
+  app.listen();
+}
+
 
 function createAppRoutes(): AppRoutes {
   const prisma = new PrismaClient();
@@ -26,3 +35,5 @@ function createAppRoutes(): AppRoutes {
 
   return appRoutes;
 }
+
+bootstrap()

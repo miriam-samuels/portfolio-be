@@ -15,17 +15,18 @@ class DatabaseConfig {
         })
     }
 
-    async Connect() {
+    async connect() {
         try {
             await this.client.connect()
             await this.client.db(this.dbUser).command({ ping: 1 });
             console.log("Pinged your deployment. You successfully connected to MongoDB!");
         } catch (error) {
             console.log("Error connecting to DB", error);
-
-        } finally {
-            await this.client.close();
         }
+    }
+
+        getDb() {
+        return this.client.db(this.dbUser);
     }
 
 }
