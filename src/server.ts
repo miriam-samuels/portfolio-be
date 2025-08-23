@@ -1,11 +1,11 @@
 import App from './app';
 import AppRoutes from './routes/app.route';
-import { PrismaClient } from "@prisma/client";
 import BlogController from "./controller/blog.controller";
 import BlogRepository from "./repository/blog.repository";
 import BlogRoutes from "./routes/v1/blog.route";
 import V1Routes from "./routes/v1/v1.route";
 import BlogService from "./service/blog.service";
+import { PrismaClient } from '@prisma/client';
 
 
 const PORT = Number(process.env.PORT) || 3000;

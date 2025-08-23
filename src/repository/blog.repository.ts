@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-import { Blog } from '../generated/prisma';
+import { PrismaClient, Blog } from "@prisma/client";
 
 class BlogRepository {
     constructor(
