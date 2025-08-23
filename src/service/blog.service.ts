@@ -19,7 +19,7 @@ class BlogService {
         return blog;
     }
 
-    async createBlog(blog: Omit<IBlog,"id">): Promise<IBlog> {
+    async createBlog(blog:Omit<IBlog, 'id' | 'createdAt' | 'updatedAt'>): Promise<IBlog> {
         return this.blogRepo.create(blog)
     }
 
@@ -32,7 +32,7 @@ class BlogService {
     }
 
 
-    async deleteBlog(id: string): Promise<boolean> {
+    async deleteBlog(id: string): Promise<boolean> { 
         const deleted = await this.blogRepo.delete(id);
         if (!deleted) {
             throw new Error(`Blog with id ${id} not found`);

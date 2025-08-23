@@ -21,8 +21,7 @@ model Blog {
   title      String
   content    String
   author     String
-  slug       String    @unique
-  tags       String[]
+  tags       String
   excerpt    String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt

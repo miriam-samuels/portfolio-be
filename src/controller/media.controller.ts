@@ -22,13 +22,13 @@ class MediaController {
 
     public uploadFile = async (req: Request, res: Response) => {
         try {
-            const { filename, contentType } = req.body;
-            if (!filename || !contentType) {
+            const { fileName, contentType } = req.query;
+            if (!fileName || !contentType) {
                 return ResponseHelper.error(res, 'Filename and contentType are required', 400);
             }
 
-            const url = await this.mediaService.uploadFile(filename, contentType);
-            ResponseHelper.success(res, 'Signed URL generated successfully', { url }, 201);
+            const url = await this.mediaService.uploadFile(fileName as string, contentType as string);
+            ResponseHelper.success(res, 'Signed URL generated successfully', { ...url }, 201);
         } catch (error: any) {
             ResponseHelper.error(res, error?.message || 'Failed to generate upload signed URL');
         }

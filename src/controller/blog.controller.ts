@@ -3,7 +3,7 @@ import { ResponseHelper } from "../helper/response.helper";
 import BlogService from "../service/blog.service";
 
 class BlogController {
-  constructor(private readonly service: BlogService) {}
+  constructor(private readonly service: BlogService) { }
 
   public getPosts = async (req: Request, res: Response) => {
     try {
@@ -11,6 +11,15 @@ class BlogController {
       return ResponseHelper.success(res, "Fetched all blogs", blogs);
     } catch (error) {
       return ResponseHelper.error(res, "Failed to fetch blogs", error);
+    }
+  };
+
+  public getPostById = async (req: Request, res: Response) => {
+    try {
+      const blogs = await this.service.getBlogById(req.params?.id);
+      return ResponseHelper.success(res, "Fetched blog", blogs);
+    } catch (error) {
+      return ResponseHelper.error(res, "Failed to fetch blog", error);
     }
   };
 
@@ -54,4 +63,4 @@ class BlogController {
   };
 }
 
-export default BlogController;
+export default BlogController; 

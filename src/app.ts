@@ -1,5 +1,6 @@
 import express, { Application, Router } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors'
 class App {
     public app: Application;
     private readonly port: number;
@@ -16,6 +17,8 @@ class App {
 
     private initializeMiddlewares() {
         this.app.use(express.json());
+        this.app.use(cors());
+
     }
 
     private initializeRoutes(routes: Router[]) {

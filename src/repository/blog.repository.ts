@@ -1,37 +1,37 @@
-import { PrismaClient, Blog } from "@prisma/client";
+import { Blog } from "@prisma/client";
+import prisma from "../config/prisma.config";
 
 class BlogRepository {
     constructor(
-        private readonly prisma: PrismaClient
     ) { }
 
     async findAll(): Promise<Blog[]> {
-        return this.prisma.blog.findMany({
+        return prisma.blog.findMany({
             orderBy: { createdAt: 'desc' },
         });
     }
-
+ 
     async findById(id: string): Promise<Blog | null> {
-        return this.prisma.blog.findUnique({
+        return prisma.blog.findUnique({
             where: { id },
-        });
+        }); 
     }
 
     async create(data: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>): Promise<Blog> {
-        return this.prisma.blog.create({
+        return prisma.blog.create({
             data,
         });
     }
 
     async update(id: string, data: Partial<Blog>): Promise<Blog | null> {
-        return this.prisma.blog.update({
+        return prisma.blog.update({
             where: { id },
             data,
         });
     }
 
     async delete(id: string): Promise<boolean> {
-        const result = await this.prisma.blog.delete({
+        const result = await prisma.blog.delete({
             where: { id },
         });
         return !!result;

@@ -1,12 +1,13 @@
 import { Storage, Bucket, File } from '@google-cloud/storage';
-import path from 'node:path';
+// import path from 'node:path';
 
 class StorageService {
     private bucketName = process.env.BLOG_BUCKET ?? '';
     private projectId = process.env.GCP_PROJECT_ID ?? '';
     private storage: Storage;
     private bucket: Bucket;
-    private serviceKey = path.join(__dirname, './service-key.json');
+    // private serviceKey = path.join(__dirname, './service-key.json');
+    private serviceKey = './service-key.json';
 
     constructor() {
         this.storage = new Storage({
@@ -32,11 +33,11 @@ class StorageService {
         await this.bucket.file(filename).delete();
     }
 
-   public async generateReadSignedUrl(fileName: string, expiresInMinutes: number = 60): Promise<string> {
+    public async generateReadSignedUrl(fileName: string, expiresInMinutes: number = 60): Promise<string> {
         const options = {
             version: 'v4' as const,
             action: 'read' as const,
-            expires: Date.now() + expiresInMinutes * 60 * 1000, 
+            expires: Date.now() + expiresInMinutes * 60 * 1000,
         };
 
         const [url] = await this.bucket.file(fileName).getSignedUrl(options);
@@ -44,14 +45,14 @@ class StorageService {
     }
 
     public async generateUploadSignedUrl(
-        fileName: string, 
+        fileName: string,
         contentType: string,
         expiresInMinutes: number = 60
     ): Promise<string> {
         const options = {
             version: 'v4' as const,
             action: 'write' as const,
-            expires: Date.now() + expiresInMinutes * 60 * 1000, 
+            expires: Date.now() + expiresInMinutes * 60 * 1000,
             contentType,
         };
 

@@ -5,15 +5,18 @@ import BlogRepository from "./repository/blog.repository";
 import BlogRoutes from "./routes/v1/blog.route";
 import V1Routes from "./routes/v1/v1.route";
 import BlogService from "./service/blog.service";
-import { PrismaClient } from '@prisma/client';
-import dbConfig from './config/db.config';
+import MediaRoutes from './routes/v1/media.route';
+import MediaController from './controller/media.controller';
+import MediaService from './service/media.service';
+import StorageService from './service/storage.service';
 
 
 const PORT = Number(process.env.PORT) || 3000;
 
 async function bootstrap() {
   // 1. Connect DB
-  await dbConfig.connect();
+  // await dbConfig.connect();
+
 
   // 2. Build routes (repositories, services, controllers, etc.)
   const appRoutes = createAppRoutes();;
@@ -25,12 +28,18 @@ async function bootstrap() {
 
 
 function createAppRoutes(): AppRoutes {
-  const prisma = new PrismaClient();
-  const blogRepo = new BlogRepository(prisma);
+  const blogRepo = new BlogRepository();
+
   const blogService = new BlogService(blogRepo);
+  const storageService = new StorageService()
+  const mediaService = new MediaService(storageService);
+
   const blogController = new BlogController(blogService);
-  const blogRoutes = new BlogRoutes(blogController);
-  const v1Routes = new V1Routes(blogRoutes);
+  const mediaController = new MediaController(mediaService);
+
+  const blogRoutes = new BlogRoutes(blogController); 
+  const mediaRoutes = new MediaRoutes(mediaController);
+  const v1Routes = new V1Routes(blogRoutes, mediaRoutes);
   const appRoutes = new AppRoutes(v1Routes);
 
   return appRoutes;

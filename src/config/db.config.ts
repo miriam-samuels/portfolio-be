@@ -1,34 +1,41 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, Db, ServerApiVersion } from "mongodb";
 
 class DatabaseConfig {
-    public client: MongoClient
-    private URI = process.env.DATABASE_URL ?? "";
-    private dbUser = process.env.DB_USER ?? "";
+  private client: MongoClient;
+  private dbName = process.env.DB_NAME ?? "";
+  private isConnected = false;
 
-    constructor() {
-        this.client = new MongoClient(this.URI, {
-            serverApi: {
-                version: ServerApiVersion.v1,
-                strict: true,
-                deprecationErrors: true,
-            }
-        })
+  constructor() {
+    const URI = process.env.DATABASE_URL ?? "";
+    this.client = new MongoClient(URI, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+      },
+    });
+  }
+
+  async connect(): Promise<void> {
+    if (!this.isConnected) {
+      try {
+        await this.client.connect();
+        await this.client.db(this.dbName).command({ ping: 1 });
+        console.log("✅ Connected to MongoDB");
+        this.isConnected = true;
+      } catch (error) {
+        console.error("❌ Error connecting to DB", error);
+        throw error;
+      }
     }
+  }
 
-    async connect() {
-        try {
-            await this.client.connect()
-            await this.client.db(this.dbUser).command({ ping: 1 });
-            console.log("Pinged your deployment. You successfully connected to MongoDB!");
-        } catch (error) {
-            console.log("Error connecting to DB", error);
-        }
+  getDb(): Db {
+    if (!this.isConnected) {
+      throw new Error("Database not connected. Call connect() first.");
     }
-
-        getDb() {
-        return this.client.db(this.dbUser);
-    }
-
+    return this.client.db(this.dbName);
+  }
 }
 
-export default new DatabaseConfig()
+export default new DatabaseConfig();

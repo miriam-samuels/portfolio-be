@@ -8,6 +8,5 @@ export interface IBlog {
   isFeatured: boolean;
   createdAt: Date;
   updatedAt: Date;
-  slug: string;
-  tags: string[];
+  tags: string;
 }
