@@ -9,7 +9,9 @@ class HealthRoutes {
     }
 
     private initializeRoutes() {
-        this.router.get('/');
+        this.router.get('/', (req, res) => {
+            res.status(200).json({ status: 'ok' });
+        });
     }
 }
 
