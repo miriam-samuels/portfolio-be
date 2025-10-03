@@ -9,6 +9,7 @@ import MediaRoutes from './routes/v1/media.route';
 import MediaController from './controller/media.controller';
 import MediaService from './service/media.service';
 import StorageService from './service/storage.service';
+import HealthRoutes from './routes/v1/health.route';
 
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -37,9 +38,10 @@ function createAppRoutes(): AppRoutes {
   const blogController = new BlogController(blogService);
   const mediaController = new MediaController(mediaService);
 
-  const blogRoutes = new BlogRoutes(blogController); 
+  const blogRoutes = new BlogRoutes(blogController);
   const mediaRoutes = new MediaRoutes(mediaController);
-  const v1Routes = new V1Routes(blogRoutes, mediaRoutes);
+  const healthRoutes = new HealthRoutes();
+  const v1Routes = new V1Routes(blogRoutes, mediaRoutes, healthRoutes);
   const appRoutes = new AppRoutes(v1Routes);
 
   return appRoutes;
