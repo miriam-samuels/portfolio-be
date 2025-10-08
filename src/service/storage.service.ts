@@ -7,7 +7,7 @@ class StorageService {
     private storage: Storage;
     private bucket: Bucket;
     // private serviceKey = path.join(__dirname, './service-key.json');
-    private serviceKey = './service-key.json';
+    private serviceKey = '/etc/secrets/service-key.json';
 
     constructor() {
         this.storage = new Storage({
