@@ -14,7 +14,7 @@ class BlogRoutes {
         this.router.get('/', this.blogController.getPosts);
         this.router.get('/:id', this.blogController.getPostById);
         this.router.post('/', this.blogController.createPost);
-        this.router.patch('/', this.blogController.updatePost);
+        this.router.patch('/:id', this.blogController.updatePost);
         this.router.delete('/:id', this.blogController.deletePost);
     }
 }

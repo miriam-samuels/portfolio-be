@@ -14,9 +14,9 @@ class MediaService {
         };
     }
 
-    async uploadFile(filePath: string, originalName: string) {
-        const destination = `uploads/${Date.now()}-${originalName}`;
-        const publicUrl = await this.storageService.generateUploadSignedUrl(filePath, destination);
+    async uploadFile(filePath: string, contentType: string) {
+        // const destination = `uploads/${Date.now()}-${originalName}`;
+        const publicUrl = await this.storageService.generateUploadSignedUrl(filePath, contentType);
         return { url: publicUrl };
     }
 
