@@ -5,6 +5,7 @@ export interface IBlog {
   content: string;
   author: string;
   thumbnail: string;
+  slug: string ;
   isFeatured: boolean;
   createdAt: Date;
   updatedAt: Date;

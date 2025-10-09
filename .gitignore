@@ -4,3 +4,4 @@ node_modules
 service-key.json
 sk.json
 dist
+/src/generated/prisma

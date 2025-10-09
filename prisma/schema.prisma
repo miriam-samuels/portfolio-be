@@ -15,15 +15,16 @@ datasource db {
 }
 
 model Blog {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  isFeatured Boolean   @default(false)
-  thumbnail  String
-  title      String
-  content    String
-  author     String
-  tags       String
-  excerpt    String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String
+  excerpt   String
+  thumbnail String
+  author    String
+  tags      String
+  isFeatured Boolean @default(false)
+  slug      String   @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 

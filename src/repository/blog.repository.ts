@@ -10,11 +10,17 @@ class BlogRepository {
             orderBy: { createdAt: 'desc' },
         });
     }
- 
+
     async findById(id: string): Promise<Blog | null> {
         return prisma.blog.findUnique({
             where: { id },
-        }); 
+        });
+    }
+
+    async findOne(where: any): Promise<Blog | null> {
+        return prisma.blog.findUnique({
+            where,
+        });
     }
 
     async create(data: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>): Promise<Blog> {
