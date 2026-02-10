@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import App from './app';
 import AppRoutes from './routes/app.route';
 import BlogController from "./controller/blog.controller";

@@ -10,6 +10,7 @@ class BlogController {
       const blogs = await this.service.getAllBlogs();
       return ResponseHelper.success(res, "Fetched all blogs", blogs);
     } catch (error) {
+      
       return ResponseHelper.error(res, "Failed to fetch blogs", error);
     }
   };

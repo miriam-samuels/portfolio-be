@@ -13,6 +13,7 @@ export class ResponseHelper {
     }
 
     static error(res: Response, message: string, error?: any, status = 500) {
+        console.error("Error Response:", message, error);
         const response: ApiResponse = {
             success: false,
             message,
